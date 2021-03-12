@@ -9,6 +9,27 @@ export default class PlantList extends Component {
   //   - set the returned plants array to this.state.plants
 
   /*********  DON'T CHANGE ANYTHING IN THE RENDER FUNCTION *********/
+  constructor(){
+    super()
+    this.state = {
+      loading: false,
+      plants: []
+    }
+  }
+
+  componentDidMount(){
+    this.setState({loading: true})
+    axios
+    .get(`http://localhost:3333/plants`)
+    .then(res => {
+      this.setState({
+        loading: false,
+        plants: res.data
+      })
+    })
+  }
+
+
   render() {
     return (
       <main className="plant-list">
